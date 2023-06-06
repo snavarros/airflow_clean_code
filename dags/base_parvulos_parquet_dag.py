@@ -8,6 +8,8 @@ from src.gpw.bases_parvulos import set_dtypes_base_parvulos
 from src.gpw.bases_parvulos import set_date_base_parvulos
 from src.common.sharepoint.upload import upload_to_sharepoint
 from src.common.crear_carpetas import create_data_folders
+from airflow.operators.empty import EmptyOperator
+from airflow.utils.dates import days_ago
 
 from os import path
 
@@ -21,9 +23,10 @@ default_args = {'owner': dag_owner,
 
 
 @dag(
+    'base_parvulos_parquet',
     default_args=default_args,
     schedule_interval='@daily',
-    start_date=datetime(2023, 6, 5),
+    start_date=days_ago(-1),
     tags=['parquet', 'bases']
 )
 def etl_base_parvulos_gpw():
@@ -96,10 +99,12 @@ def etl_base_parvulos_gpw():
 
         upload_to_sharepoint(sharepoint_url, sharepoint_dir, full_url)
 
+    end = EmptyOperator(task_id='end')
+
     extract = extraer_base_parvulos(anio, anio_parvulario, mes, 1)
     transform = transformar_base_parvulos(extract)
     cargar_base_parvulos(transform, URL_SHAREPOINT,
-                         DIR_SHAREPOINT, URL_SERVIDOR, FILE_NAME)
+                         DIR_SHAREPOINT, URL_SERVIDOR, FILE_NAME) >> end
 
 
 etl_base_parvulos = etl_base_parvulos_gpw()
