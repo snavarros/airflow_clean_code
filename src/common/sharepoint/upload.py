@@ -1,10 +1,9 @@
 import os
 
-from dotenv import load_dotenv
+
 from office365.runtime.auth.user_credential import UserCredential
 from office365.sharepoint.client_context import ClientContext
-
-load_dotenv()
+from airflow.models import Variable
 
 
 def get_sharepoint_context_using_user(url_sharepoint: str):
@@ -16,9 +15,9 @@ def get_sharepoint_context_using_user(url_sharepoint: str):
     sharepoint_url = url_sharepoint
 
     # Initialize the client credentials
-    user_credentials = UserCredential(
-        os.environ["USER_SHAREPOINT"], os.environ["PASSWORD_SHAREPOINT"]
-    )
+    user_credentials = UserCredential(Variable.get("USER_SHAREPOINT"),
+                                      Variable.get("PASSWORD_SHAREPOINT")
+                                      )
 
     # create client context object
     ctx = ClientContext(sharepoint_url).with_credentials(user_credentials)

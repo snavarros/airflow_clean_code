@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 
 def set_dtypes_base_parvulos(dataframe):
@@ -110,4 +111,11 @@ def set_dtypes_base_parvulos(dataframe):
     dataframe['d29'] = dataframe['d29'].fillna(-2).astype('int8')
     dataframe['d30'] = dataframe['d30'].fillna(-2).astype('int8')
     dataframe['d31'] = dataframe['d31'].fillna(-2).astype('int8')
+    return dataframe
+
+
+def set_date_base_parvulos(dataframe):
+    dataframe['fec_nac_alu'] = pd.to_datetime(dataframe['fec_nac_alu'])
+    dataframe['fec_ing_alu'] = pd.to_datetime(dataframe['fec_ing_alu'])
+    dataframe['fecha_retiro'] = pd.to_datetime(dataframe['fecha_retiro'])
     return dataframe

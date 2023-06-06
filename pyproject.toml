@@ -9,11 +9,12 @@ packages = [{include = "airflow_junji"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 apache-airflow = "^2.6.1"
-office365-rest-python-client = "^2.4.1"
 python-dotenv = "^1.0.0"
 psycopg2 = "^2.9.6"
 pandas = "^2.0.2"
 apache-airflow-providers-postgres = "^5.5.0"
+office365-rest-python-client = "2.3.13"
+office365 = "^0.3.15"
 
 
 [tool.poetry.group.dev.dependencies]

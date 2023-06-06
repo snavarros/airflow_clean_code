@@ -3,3 +3,7 @@ __pycache__
 .env
 
 logs/*
+
+.venv
+
+dags/data

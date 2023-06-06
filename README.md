@@ -1,6 +1,7 @@
 # INSTALACION: AIRFLOW DOCKER LOCALMENTE
 
 - https://youtu.be/aTaytcxy2Ck
+- Es recomendable que todas las librerias se instalen en Airflow (office365)
 
 ## Montar las imagenes
 
