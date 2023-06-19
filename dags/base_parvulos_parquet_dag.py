@@ -9,7 +9,7 @@ from src.gpw.bases_parvulos import set_date_base_parvulos
 from src.common.sharepoint.upload import upload_to_sharepoint
 from src.common.crear_carpetas import create_data_folders
 from airflow.operators.empty import EmptyOperator
-from airflow.utils.dates import days_ago
+
 
 from os import path
 
@@ -26,12 +26,12 @@ default_args = {'owner': dag_owner,
     'base_parvulos_parquet',
     default_args=default_args,
     schedule_interval='@daily',
-    start_date=days_ago(-1),
+    start_date=datetime(2023, 6, 12),
     tags=['parquet', 'bases']
 )
 def etl_base_parvulos_gpw():
     '''
-    ### ETL BASE PARVULOS GESPARVU WEB
+    ETL BASE PARVULOS GESPARVU WEB
     Este dag es un proceso ETL, extraida de una consulta
     SQL, su finalidad es obtener una consulta maestra de la cual deriven otros
     reportes,siendo esta consulta almacenada como archivo RAW en formato

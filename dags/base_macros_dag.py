@@ -16,7 +16,7 @@ default_args = {'owner': dag_owner,
 @dag(
     default_args=default_args,
     schedule_interval='@daily',
-    start_date=days_ago(-1),
+    start_date=days_ago(0),
     tags=['parquet', 'bases']
 )
 def base_macro_dag():
